@@ -39,3 +39,15 @@ public String hello(Model model) {
 - 스프링 부트 템플릿엔진 기본 viewName 매핑
 - resources:templates/+{ViewName}+.html
 - 리턴 값 ‘hello’가 ViewName에 매핑되어 hello.html 로 전달
+
+---
+
+> **@ResponseBody**
+
+
+**@ResponseBody 를 통해 http body 의 문자값을 그대로 반환한다**
+
+viewResolver 가 쓰이지 않고 HttpMessageConverter 로 변환 후 http body로 보내게 된다
+
+- 기본 문자처리 : StringHttpMessageconverter
+- 기본 객체처리 : MappingJackson2HttpMessageConverter → Json 으로 반환
