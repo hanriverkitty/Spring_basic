@@ -51,3 +51,36 @@ viewResolver 가 쓰이지 않고 HttpMessageConverter 로 변환 후 http body�
 
 - 기본 문자처리 : StringHttpMessageconverter
 - 기본 객체처리 : MappingJackson2HttpMessageConverter → Json 으로 반환
+
+---
+
+> **@Test**
+>
+- @Test 를 통해 테스트케이스 작성
+
+> **@AfterEach**
+>
+- @AfterEach 를 통해 각 테스트가 종료될 때마다 @AfterEach의 메소드를 실행시킨다
+- 테스트는 순서가 없이 실행되기 때문에, 각각 독립성을 가지고 있어야 한다
+
+> **@BeforeEach**
+>
+- 각 테스트 전에 호출된다
+
+---
+
+```java
+MemoryMemberRepository memberRepository = new MemoryMemberRepository();
+MemberService memberService = new MemberService();
+//이렇게 만든다면 MemberService 에서 생성한 MemoryMemberRepository와 테스트케이스의 MemoryMemberRepository는 다른 객체가 된다. 따라서 같은 인스턴스를 쓰게 만들기 위해 MemberService 생성자에 MemoryMemberRespository 를 넣어준다.
+
+public class MemberService {
+	private final MemberRepository memberRepository;
+	public MemberService(MemberRepository memberRepository) {
+		this.memberRepository = memberRepository;
+	}
+...
+}
+```
+
+이처럼 외부에서 정보를 넣어주는 것을 DI (의존성 주입)이라고 한다
